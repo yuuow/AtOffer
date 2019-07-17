@@ -1,6 +1,6 @@
 ## [替换空格](https://www.nowcoder.com/practice/4060ac7e3e404ad1a894ef3e17650423)
 
-<details open=""><summary><strong>知识点</strong></summary><p><code style="color: var(--vscode-textPreformat-foreground); font-family: Menlo, Monaco, Consolas, &quot;Droid Sans Mono&quot;, &quot;Courier New&quot;, monospace, &quot;Droid Sans Fallback&quot;; font-size: 14px; line-height: 19px;">字符串</code></details>
+<code style="color: var(--vscode-textPreformat-foreground); font-family: Menlo, Monaco, Consolas, &quot;Droid Sans Mono&quot;, &quot;Courier New&quot;, monospace, &quot;Droid Sans Fallback&quot;; font-size: 14px; line-height: 19px;">字符串</code>
 
 #### 题目描述
 
