@@ -41,7 +41,7 @@ public class Solution {
     }
 
     //第四种 滚动优化
-    public int Fibonacci(int n) {
+    public int Fibonacci4(int n) {
         if (n < 1)
             return 0;
         if (n == 1 || n == 2)
