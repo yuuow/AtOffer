@@ -30,7 +30,7 @@ public class Solution {
 }
 ```
 #### 思路二(类似插入排序)
-* 简单粗暴，依次找到第一个偶数，相对的第一个奇数，然后整体交换位置
+* 简单粗暴，依次找到第一个偶数，和其相对的第一个奇数，然后整体交换位置
 ```java
 public class Solution {
     public void reOrderArray(int[] array) {
