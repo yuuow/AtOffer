@@ -37,3 +37,15 @@ public class Solution {
     }
 }
 ```
+判断两个数完全相等
+```java
+public class Solution {
+    public boolean sameTree(TreeNode T1, TreeNode T2) {
+        if (T1 == null && T2 == null)
+            return true;
+        return T1 != null && T2 != null 
+            && sameTree(T1.left, T2.left) 
+            && sameTree(T1.right, T2.right);
+    }
+}
+```
