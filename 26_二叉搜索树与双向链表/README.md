@@ -10,7 +10,7 @@
 <img width="80%" src="./images/26_s1.png">
 <img width="80%" src="./images/26_s2.png">
 
-* 理解二叉搜索树到**排序双向链表** 之间的转换思路
+* 理解二叉搜索树到 **排序双向链表** 之间的转换思路
 * 从叶子节点改变其左右指针的指向(递归/迭代)
 * 最后返回头节点 
 
@@ -112,9 +112,10 @@ public class Solution {
     }
 }
 ```
-<img width="80%" src="./images/26_s3.png">   
 
 #### 思路三(最优递归)
+<img width="80%" src="./images/26_s3.png">   
+
 ```java
 public class Solution {
 
