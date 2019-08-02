@@ -5,7 +5,7 @@
 #### 题目描述
 
 > 输入两个链表，找出它们的第一个公共结点。
-
+---
 #### 思路一(使用Set)
 ```java
 import java.util.HashSet;
