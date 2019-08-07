@@ -17,7 +17,7 @@
 前序序列化
 
 ```java
-ublic class Codec {
+public class Codec {
 
     public String serialize(TreeNode root) {
         StringBuilder res = new StringBuilder();
@@ -64,6 +64,7 @@ ublic class Codec {
 
 ```java
 import java.util.*;
+
 public class Solution {
     String Serialize(TreeNode root) {
         StringBuilder sb = serHelper(root);
