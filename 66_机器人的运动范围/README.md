@@ -11,6 +11,8 @@
 
 #### 思路(BFS)
 * [图的遍历(BFS和DFS)](https://www.jianshu.com/p/70952b51f0c8)
+* 注意 `threshold < 0 ( k < 0)` 的情况，也就是不能包含 `(0,0)`
+
 ```java
 import java.util.*;
 
