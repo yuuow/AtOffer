@@ -165,3 +165,43 @@ public static void shellSort(int[] arr) {
     }
 }
 ```
+
+## 五、快速排序(QuickSort)
+> 先从数列中取出一个数作为 key 值，将比这个数小的数全部放在它的左边，大于或等于它的数全部放在它的右边，对左右两个小数列重复第二步，直至各区间只有1个数。
+
+![QuickSort](./images/00_s6.gif)
+
+### 平均时间复杂度 O(n*logN)
+
+```java
+public static void quickSort(int[] arr) {
+    if (arr == null || arr.length == 0)
+        return;
+    quickProcess(arr, 0, arr.length - 1);
+}
+
+static void quickProcess(int[] arr, int L, int R) {
+    if (L >= R)
+        return;
+    int p = partition(arr, L, R);
+    quickProcess(arr, L, p - 1);
+    quickProcess(arr, p + 1, R);
+}
+
+/**
+* 对arr[l...r]部分进行partition操作
+* 返回p, 使得arr[L...p-1] < arr[p] ; arr[p+1...R] > arr[p]（并不有序）
+*/
+static int partition(int[] arr, int L, int R) {
+    //直接选取 arr[L] 作为 pivot(中心点)
+    int key = arr[L];
+    int pivot = L;
+    for (int i = L + 1; i <= R; i++) {
+        if (arr[i] < key)
+            swap(arr, i, ++pivot);
+    }
+    // 将arr[L]放到pivot位置(中间) --> 完全了按照arr[L]划分数组的目的
+    swap(arr, pivot, L);
+    return pivot;
+}
+```

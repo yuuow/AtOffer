@@ -94,4 +94,35 @@ class Solution {
             gap /= 2;
         }
     }
+
+    public static void quickSort(int[] arr) {
+        if (arr == null || arr.length == 0)
+            return;
+        quickProcess(arr, 0, arr.length - 1);
+    }
+
+    static void quickProcess(int[] arr, int L, int R) {
+        if (L >= R)
+            return;
+        int p = partition(arr, L, R);
+        quickProcess(arr, L, p - 1);
+        quickProcess(arr, p + 1, R);
+    }
+
+    /**
+    * 对arr[l...r]部分进行partition操作
+    * 返回p, 使得arr[L...p-1] < arr[p] ; arr[p+1...R] > arr[p]
+    */
+    static int partition(int[] arr, int L, int R) {
+        //直接选取 arr[L] 作为 pivot(中心点)
+        int key = arr[L];
+        int pivot = L;
+        for (int i = L + 1; i <= R; i++) {
+            if (arr[i] < key)
+                swap(arr, i, ++pivot);
+        }
+        // 将arr[L]放到pivot位置(中间) --> 完全了按照arr[L]划分数组的目的
+        swap(arr, pivot, L);
+        return pivot;
+    }
 }
