@@ -101,3 +101,39 @@ public static void selectionSort(int[] arr) {
     }
 }
 ```
+
+## 三、插入排序(Insertion Sort)
+> 在要排序的一组数中，假定前n-1个数已经排好序，现在将第n个数插到前面的有序数列中，使得这n个数也是排好顺序的。如此反复循环，直到全部排好顺序。
+
+![InsertionSort](./images/00_s4.gif)
+
+### 平均时间复杂度 O(n<sup>2</sup>)
+
+```java
+public static void insertSort(int[] arr) {
+    if (arr == null || arr.length == 0)
+        return;
+    for (int i = 1; i < arr.length; i++) {
+        int j = i;
+        int target = arr[i];
+        // 后移 注意 j=i
+        while (j > 0 && target < arr[j - 1]) {
+            arr[j] = arr[j - 1];
+            j--;
+        }
+        // 插入
+        arr[j] = target;
+    }
+}
+```
+另一种简便的写法(直接交换值，不需要插入)
+```java
+ public static void insertSort(int[] arr) {
+    if (arr == null || arr.length == 0)
+        return;
+    for (int i = 0; i < arr.length - 1; i++) {
+        for (int j = i; j > 0 && arr[j] < arr[j - 1]; j--)
+            swap(arr, j - 1, j);
+    }
+}
+```
