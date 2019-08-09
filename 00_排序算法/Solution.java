@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 class Solution {
     static void swap(int[] arr, int i, int j) {
         arr[i] = arr[i] ^ arr[j];
@@ -156,5 +158,34 @@ class Solution {
             help[k++] = arr[p2++];
         for (int i = 0; i < k; i++)
             arr[i + L] = help[i];
+    }
+
+    public static void RadixSort(int[] arr) {
+        if (arr == null || arr.length <= 1)
+            return;
+        int max = arr[0];
+        for (int i = 1; i < arr.length; i++)
+            max = Math.max(max, arr[i]);
+        int maxDigit = 0;
+        while (max != 0) {
+            max /= 10;
+            maxDigit++;
+        }
+        int mod = 10, div = 1;
+        ArrayList<ArrayList<Integer>> bucketList = new ArrayList<>();
+        for (int i = 0; i < 10; i++)
+            bucketList.add(new ArrayList<Integer>());
+        for (int i = 0; i < maxDigit; i++, mod *= 10, div *= 10) {
+            for (int j = 0; j < arr.length; j++) {
+                int num = (arr[j] % mod) / div;
+                bucketList.get(num).add(arr[j]);
+            }
+            int index = 0;
+            for (int j = 0; j < bucketList.size(); j++) {
+                for (int k = 0; k < bucketList.get(j).size(); k++)
+                    arr[index++] = bucketList.get(j).get(k);
+                bucketList.get(j).clear();
+            }
+        }
     }
 }

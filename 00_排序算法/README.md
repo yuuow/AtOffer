@@ -252,3 +252,44 @@ static void merge(int[] arr, int L, int mid, int R) {
         arr[i + L] = help[i];
 }
 ```
+
+## 七. 堆排序(HeapSort)
+> 堆排序是指利用堆这种数据结构所设计的一种排序算法。堆积是一个近似完全二叉树的结构，并同时满足堆积的性质：即子结点的键值或索引总是小于（或者大于）它的父节点。
+
+## 八. 基数排序(RadixSort)
+> 基数排序是按照低位先排序，然后收集；再按照高位排序，然后再收集；依次类推，直到最高位。
+
+![RadixSort](./images/00_s10.gif)
+
+```java
+public static void RadixSort(int[] arr) {
+    if (arr == null || arr.length <= 1)
+        return;
+    int max = arr[0];
+    for (int i = 1; i < arr.length; i++)
+        max = Math.max(max, arr[i]);
+    //计算出最大数的位数
+    int maxDigit = 0;
+    while (max != 0) {
+        max /= 10;
+        maxDigit++;
+    }
+    int mod = 10, div = 1;
+    ArrayList<ArrayList<Integer>> bucketList = new ArrayList<>();
+    for (int i = 0; i < 10; i++)
+        bucketList.add(new ArrayList<Integer>());
+    for (int i = 0; i < maxDigit; i++, mod *= 10, div *= 10) {
+        for (int j = 0; j < arr.length; j++) {
+            // 当前所在位的值
+            int num = (arr[j] % mod) / div;
+            bucketList.get(num).add(arr[j]);
+        }
+        int index = 0;
+        for (int j = 0; j < bucketList.size(); j++) {
+            for (int k = 0; k < bucketList.get(j).size(); k++)
+                arr[index++] = bucketList.get(j).get(k);
+            bucketList.get(j).clear();
+        }
+    }
+}
+```
