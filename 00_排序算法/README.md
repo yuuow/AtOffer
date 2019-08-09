@@ -137,3 +137,31 @@ public static void insertSort(int[] arr) {
     }
 }
 ```
+
+## 四. 希尔排序(Shell Sort)
+> 在要排序的一组数中，根据某一增量分为若干子序列，并对子序列分别进行插入排序。然后逐渐将增量减小,并重复上述过程。直至增量为1,此时数据序列基本有序,最后进行插入排序。
+
+![ShellSort](./images/00_s5.jpg)
+
+
+```java
+public static void shellSort(int[] arr) {
+    int len = arr.length;
+    int temp, gap = len / 2;
+    while (gap > 0) {
+        for (int i = gap; i < len; i++) {
+            temp = arr[i];
+            // preIndex 表示上一个节点 
+            int preIndex = i - gap;
+            // 插入排序 （当上节点的值一直比 temp(arr[i]) 大，将上节点整体后移，最后中间空缺值就是为 temp）
+            while (preIndex >= 0 && arr[preIndex] > temp) {
+                arr[preIndex + gap] = arr[preIndex];
+                preIndex -= gap;
+            }
+            // 注意 preIndex 值的变化
+            arr[preIndex + gap] = temp;
+        }
+        gap /= 2;
+    }
+}
+```
