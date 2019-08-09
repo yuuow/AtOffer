@@ -171,7 +171,7 @@ public static void shellSort(int[] arr) {
 
 ![QuickSort](./images/00_s6.gif)
 
-### 平均时间复杂度 O(n*logN)
+### 平均时间复杂度 O(n*logn)
 
 ```java
 public static void quickSort(int[] arr) {
@@ -203,5 +203,52 @@ static int partition(int[] arr, int L, int R) {
     // 将arr[L]放到pivot位置(中间) --> 完全了按照arr[L]划分数组的目的
     swap(arr, pivot, L);
     return pivot;
+}
+```
+
+## 六. 归并排序(Merge Sort)
+> 归并排序是分治法一个很好的应用，先递归到最底层，然后从下往上每次两个序列进行归并合起来，是一个由上往下分开，再由下往上合并的过程。
+
+![MergeSort](./images/00_s7.gif)
+![MergeSort](./images/00_s8.png)
+
+### 平均时间复杂度 O(n*logn)
+
+```java
+public static void mergeSort(int[] arr) {
+    if (arr == null || arr.length <= 1)
+        return;
+    mergeProcess(arr, 0, arr.length - 1);
+}
+
+static void mergeProcess(int[] arr, int L, int R) {
+    if (L >= R)
+        return;  
+    //相当于 (R+L)/2;
+    int mid = L + ((R - L) >> 1); 
+    mergeProcess(arr, L, mid); 
+    mergeProcess(arr, mid + 1, R); 
+    /** 这个是一个优化，因为arr[L,mid]和arr[mid+1,R]已经有序，
+     * 所以如果满足这个条件，就不要排序了,防止一开始数组有序 */
+    if (arr[mid] > arr[mid + 1])
+        merge(arr, L, mid, R); 
+}
+
+static void merge(int[] arr, int L, int mid, int R) {
+    int[] help = new int[R - L + 1];
+    int k = 0;
+    int p1 = L, p2 = mid + 1;
+    while (p1 <= mid && p2 <= R)
+         //左右两边相等的话，就先拷贝左边的(实现稳定性)
+        help[k++] = arr[p1] <= arr[p2] ? arr[p1++] : arr[p2++]; 
+    //左边剩余的部分
+    while (p1 <= mid)  
+        help[k++] = arr[p1++];
+    //右边剩余的部分
+    while (p2 <= R)   
+        help[k++] = arr[p2++];
+    //拷贝回原来的数组
+    for (int i = 0; i < k; i++) 
+        arr[i + L] = help[i];
 }
 ```

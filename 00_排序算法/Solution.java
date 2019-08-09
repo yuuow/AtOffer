@@ -125,4 +125,36 @@ class Solution {
         swap(arr, pivot, L);
         return pivot;
     }
+
+    public static void mergeSort(int[] arr) {
+        if (arr == null || arr.length <= 1)
+            return;
+        mergeProcess(arr, 0, arr.length - 1);
+    }
+
+    static void mergeProcess(int[] arr, int L, int R) {
+        if (L >= R)
+            return;
+        int mid = L + ((R - L) >> 1);
+        mergeProcess(arr, L, mid);
+        mergeProcess(arr, mid + 1, R);
+        /**这个是一个优化，因为arr[L,mid]和arr[mid+1,R]已经有序，
+         * 所以如果满足这个条件，就不要排序了,防止一开始数组有序*/
+        if (arr[mid] > arr[mid + 1])
+            merge(arr, L, mid, R);
+    }
+
+    static void merge(int[] arr, int L, int mid, int R) {
+        int[] help = new int[R - L + 1];
+        int k = 0;
+        int p1 = L, p2 = mid + 1;
+        while (p1 <= mid && p2 <= R)
+            help[k++] = arr[p1] <= arr[p2] ? arr[p1++] : arr[p2++];
+        while (p1 <= mid)
+            help[k++] = arr[p1++];
+        while (p2 <= R)
+            help[k++] = arr[p2++];
+        for (int i = 0; i < k; i++)
+            arr[i + L] = help[i];
+    }
 }
