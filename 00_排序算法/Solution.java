@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 
 class Solution {
     static void swap(int[] arr, int i, int j) {
@@ -185,6 +186,33 @@ class Solution {
                 for (int k = 0; k < bucketList.get(j).size(); k++)
                     arr[index++] = bucketList.get(j).get(k);
                 bucketList.get(j).clear();
+            }
+        }
+    }
+
+    public static void CountingSort(int[] arr) {
+        if (arr == null || arr.length == 0)
+            return;
+        int bias, min = arr[0], max = arr[0];
+        for (int i = 1; i < arr.length; i++) {
+            if (arr[i] > max)
+                max = arr[i];
+            if (arr[i] < min)
+                min = arr[i];
+        }
+        bias = 0 - min;
+        int[] bucket = new int[max - min + 1];
+        Arrays.fill(bucket, 0);
+        for (int i = 0; i < arr.length; i++)
+            bucket[arr[i] + bias]++;
+        int index = 0, i = 0;
+        while (index < arr.length) {
+            if (bucket[i] != 0) {
+                arr[index] = i - bias;
+                bucket[i]--;
+                index++;
+            } else {
+                i++;
             }
         }
     }
