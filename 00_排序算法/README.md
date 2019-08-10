@@ -256,6 +256,49 @@ static void merge(int[] arr, int L, int mid, int R) {
 ## 七. 堆排序(HeapSort)
 > 堆排序是指利用堆这种数据结构所设计的一种排序算法。堆积是一个近似完全二叉树的结构，并同时满足堆积的性质：即子结点的键值或索引总是小于（或者大于）它的父节点。
 
+![heapSort](./images/00_s14.gif)
+```java
+public static int[] heapSort(int[] arr) {
+    int n = arr.length;
+    //构建大顶堆
+    for (int i = (n - 2) / 2; i >= 0; i--) {
+        downAdjust(arr, i, n - 1);
+    }
+    //进行堆排序
+    for (int i = n - 1; i >= 1; i--) {
+        // 把堆顶元素与最后一个元素交换
+        int temp = arr[i];
+        arr[i] = arr[0];
+        arr[0] = temp;
+        // 把打乱的堆进行调整，恢复堆的特性
+        downAdjust(arr, 0, i - 1);
+    }
+    return arr;
+}
+
+//下沉操作
+static void downAdjust(int[] arr, int parent, int n) {
+    //临时保存要下沉的元素
+    int temp = arr[parent];
+    //定位左孩子节点的位置
+    int child = 2 * parent + 1;
+    //开始下沉
+    while (child <= n) {
+        // 如果右孩子节点比左孩子大，则定位到右孩子
+        if (child + 1 <= n && arr[child] < arr[child + 1])
+            child++;
+        // 如果孩子节点小于或等于父节点，则下沉结束
+        if (arr[child] <= temp)
+            break;
+        // 父节点进行下沉
+        arr[parent] = arr[child];
+        parent = child;
+        child = 2 * parent + 1;
+    }
+    arr[parent] = temp;
+}
+```
+
 ## 八. 基数排序(RadixSort)
 > 基数排序是按照低位先排序，然后收集；再按照高位排序，然后再收集；依次类推，直到最高位。
 

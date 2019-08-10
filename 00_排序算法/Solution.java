@@ -161,42 +161,44 @@ class Solution {
             arr[i + L] = help[i];
     }
 
-    public static void heapSort(int[] arr) {
-        if (arr == null || arr.length <= 1)
-            return;
-        for (int i = 0; i < arr.length; i++) {
-            siftUp(arr, i);
+    public static int[] heapSort(int[] arr) {
+        int n = arr.length;
+        //构建大顶堆
+        for (int i = (n - 2) / 2; i >= 0; i--) {
+            downAdjust(arr, i, n - 1);
         }
-        int size = arr.length - 1;
-        swap(arr, 0, size);
-        while (size > 0) {
-            siftDown(arr, 0, size);
-            swap(arr, 0, --size);
+        //进行堆排序
+        for (int i = n - 1; i >= 1; i--) {
+            // 把堆顶元素与最后一个元素交换
+            int temp = arr[i];
+            arr[i] = arr[0];
+            arr[0] = temp;
+            // 把打乱的堆进行调整，恢复堆的特性
+            downAdjust(arr, 0, i - 1);
         }
+        return arr;
     }
 
-    //上浮的过程  -->  把新插入的数调整为大根堆的过程
-    static void siftUp(int[] arr, int i) {
-        while (arr[i] > arr[(i - 1) / 2]) {
-            swap(arr, i, (i - 1) / 2);
-            i = (i - 1) / 2;
+    //下沉操作
+    static void downAdjust(int[] arr, int parent, int n) {
+        //临时保存要下沉的元素
+        int temp = arr[parent];
+        //定位左孩子节点的位置
+        int child = 2 * parent + 1;
+        //开始下沉
+        while (child <= n) {
+            // 如果右孩子节点比左孩子大，则定位到右孩子
+            if (child + 1 <= n && arr[child] < arr[child + 1])
+                child++;
+            // 如果孩子节点小于或等于父节点，则下沉结束
+            if (arr[child] <= temp)
+                break;
+            // 父节点进行下沉
+            arr[parent] = arr[child];
+            parent = child;
+            child = 2 * parent + 1;
         }
-    }
-
-    //下沉的过程  -->  这个函数就是一个数变小了，往下沉的函数,改变的数为index 
-    // 目前的自己指定的堆的大小为heapSize
-    static void siftDown(int[] arr, int i, int heapSize) {
-        int L = 2 * i + 1;
-        while (L < heapSize) {
-            int maxIndex = L + 1 < heapSize && arr[L + 1] > arr[L] ? L + 1 : L;
-            maxIndex = arr[i] > arr[maxIndex] ? i : maxIndex;
-            if (maxIndex == i)
-                break; //自己就是最大的， 不用忘下沉
-            //否则就要一直往下沉
-            swap(arr, i, maxIndex);
-            i = maxIndex;
-            L = 2 * i + 1; //继续往下
-        }
+        arr[parent] = temp;
     }
 
     public static void RadixSort(int[] arr) {
