@@ -1,4 +1,26 @@
-# 概况
+# 排序算法
+
+- [概括](#概括)
+- [冒泡排序](#一冒泡排序bubblesort)
+- [选择排序](#二选择排序selctionsort)
+- [插入排序](#三插入排序insertion-sort)
+- [希尔排序](#四希尔排序shell-sort)
+- [快速排序](#五快速排序quicksort)
+- [归并排序](#六归并排序merge-sort)
+- [堆排序](#七堆排序heapsort)
+- [基数排序](#八基数排序radixsort)
+- [计数排序](#九计数排序counting-sort)
+- [桶排序](#十桶排序bucket-sort)
+
+-----
+## 概括
+排序算法大体可分为两种：
+* 比较排序，时间复杂度 O(n*logn) ~ O(n<sup>2</sup>) ，主要有：冒泡排序，选择排序，插入排序，归并排序，堆排序，快速排序等。
+* 非比较排序，时间复杂度可以达到O(n)，主要有：计数排序，基数排序，桶排序等。
+
+**关于稳定性**：
+* 稳定的排序算法：冒泡排序、插入排序、归并排序和基数排序。
+* 不是稳定的排序算法：选择排序、快速排序、希尔排序、堆排序。
 
 <img  src="./images/00_s1.jpg">
 
@@ -138,7 +160,7 @@ public static void insertSort(int[] arr) {
 }
 ```
 
-## 四. 希尔排序(Shell Sort)
+## 四、希尔排序(Shell Sort)
 > 在要排序的一组数中，根据某一增量分为若干子序列，并对子序列分别进行插入排序。然后逐渐将增量减小,并重复上述过程。直至增量为1,此时数据序列基本有序,最后进行插入排序。
 
 ![ShellSort](./images/00_s5.jpg)
@@ -206,7 +228,7 @@ static int partition(int[] arr, int L, int R) {
 }
 ```
 
-## 六. 归并排序(Merge Sort)
+## 六、归并排序(Merge Sort)
 > 归并排序是分治法一个很好的应用，先递归到最底层，然后从下往上每次两个序列进行归并合起来，是一个由上往下分开，再由下往上合并的过程。
 
 ![MergeSort](./images/00_s7.gif)
@@ -253,7 +275,7 @@ static void merge(int[] arr, int L, int mid, int R) {
 }
 ```
 
-## 七. 堆排序(HeapSort)
+## 七、堆排序(HeapSort)
 > 堆排序是指利用堆这种数据结构所设计的一种排序算法。堆积是一个近似完全二叉树的结构，并同时满足堆积的性质：即子结点的键值或索引总是小于（或者大于）它的父节点。
 
 ![heapSort](./images/00_s14.gif)
@@ -299,7 +321,7 @@ static void downAdjust(int[] arr, int parent, int n) {
 }
 ```
 
-## 八. 基数排序(RadixSort)
+## 八、基数排序(RadixSort)
 > 基数排序是按照低位先排序，然后收集；再按照高位排序，然后再收集；依次类推，直到最高位。
 
 ![RadixSort](./images/00_s10.gif)
